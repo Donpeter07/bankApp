@@ -1,0 +1,75 @@
+<h1>welcome {{user}}</h1>
+<a routerLink="/transaction">Transaction History</a>
+
+<div class="body-class">
+<div class="row container-fluid "  >
+    <div class="col-4"></div>
+    <div class="col-4" id="main">
+        
+            <h1 class="text-center">Deposit</h1>
+
+            <form [formGroup]="depositForm" (ngSubmit)="deposit()"  method="post">
+
+           <fieldset>
+               
+                <label for="">Account number</label><br>
+                <input type="text"  id="bk_username" formControlName="acno"  name="first" class="form-control">
+                <div *ngIf="(this.depositForm.get('acno')?.touched || this.depositForm.get('acno')?.dirty)&&this.depositForm.get('acno')?.errors"   class="error">Invalid  Account Number</div>
+
+                <label for="">Password</label>
+                <input type="password"   id="bk_pwd" formControlName="pswd" name="second" class="form-control">
+                <div *ngIf="(this.depositForm.get('pswd')?.touched || this.depositForm.get('pswd')?.dirty)&&this.depositForm.get('pswd')?.errors"   class="error">Invalid  Password</div>
+
+                <label for="">Amount</label>
+                <input type="text" id="amount" formControlName="amount" name="amount"  class="form-control"> 
+                <div *ngIf="(this.depositForm.get('Amount')?.touched || this.depositForm.get('amount')?.dirty)&&this.depositForm.get('amount')?.errors"   class="error">Invalid  Amount</div>
+
+                <button type="submit" class="btn btn-success mt-2 mb-2" id="butt">deposit</button>
+                
+        
+           </fieldset>
+        </form>
+        
+    </div>
+    <div class="col-4"></div>
+</div>
+
+
+
+
+<div class="row container-fluid "  >
+    <div class="col-4"></div>
+    <div class="col-4" id="main">
+        
+            
+            <h1 class="text-center">Withdraw</h1>
+
+            <form  [formGroup]="withdrawForm" (ngSubmit)="withdraw()"  method="post">
+
+           <fieldset>
+               
+                <label for="">Account number</label><br>
+                <input type="text"  id="bk_user" name="account" formControlName="acno1" class="form-control">
+                <div *ngIf="(this.withdrawForm.get('acno1')?.touched || this.withdrawForm.get('acno1')?.dirty)&&this.withdrawForm.get('acno1')?.errors"   class="error">Invalid  Account Number</div>
+
+                <label for="">Password</label>
+                <input type="password"   id="bk_pswd" name="password" formControlName="pswd1" class="form-control">
+                <div *ngIf="(this.withdrawForm.get('pswd1')?.touched || this.withdrawForm.get('pswd1')?.dirty)&&this.withdrawForm.get('pswd1')?.errors"   class="error">Invalid  password </div>
+
+                <label for="">Amount</label>
+                <input type="text" id="amounts" name="amount" formControlName="amount1" class="form-control">
+                <div *ngIf="(this.withdrawForm.get('amount1')?.touched || this.withdrawForm.get('amount1')?.dirty)&&this.withdrawForm.get('amount1')?.errors"   class="error">Invalid  Amount</div>
+
+                <button type="submit"  class="btn btn-danger  mt-2 mb-2" id="butts">withdraw</button>
+                
+        
+           </fieldset>
+        </form>
+        
+    </div>
+    <div class="col-4"></div>
+</div>
+</div>
+
+
+

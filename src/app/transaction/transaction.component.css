@@ -1,0 +1,10 @@
+table,th,td{
+    border:solid 3px black;
+    background-color: rgb(14, 216, 206);
+    margin-left: 400px;
+    width: 50%;
+    text-align: center;
+}
+h1{
+    text-align: center;
+}

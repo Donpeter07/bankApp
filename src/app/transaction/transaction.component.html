@@ -1,0 +1,21 @@
+<h1> History</h1>
+
+<table >
+    <thead>
+
+        <tr >
+            <th>SI.no</th>
+            <th>Amount &nbsp;&nbsp;</th>
+            <th>Type</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr *ngFor= "let trans of transactions; let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{trans.amount}}</td>
+            <td>{{trans.type}}</td>
+        </tr>
+    </tbody>
+</table>
+<a routerLink="/dashboard">Home page</a>
