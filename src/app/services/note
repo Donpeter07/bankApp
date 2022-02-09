@@ -1,0 +1,38 @@
+
+
+
+
+
+to build : ng build --prod
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11.
+
+12.Asynchronous event - Observable - RXJS
+    12.1 Resolve State - subscribe 
+    12.2 Reject state  - catch
+
+13 parent child confirmation
+    13.1 parent to child - input decorator
+    13.2 child to parent - output decorator
+    
+14.Event emitter -
+
+15.Angular Pipes -   

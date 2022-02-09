@@ -1,0 +1,4 @@
+<div [@openClose]="isOpen? 'open' : 'close' ">
+    <p style="color:aqua">I am {{isOpen? "open":"close"}} Now </p>
+    <button class="btn btn-secondary" (click)='toggle()'>Toggle</button>
+</div>

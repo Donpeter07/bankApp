@@ -1,12 +1,19 @@
 <h1>welcome {{user}}</h1>
+<p>Login time:{{lDate|date:'shortTime'}}</p>
 <a routerLink="/transaction">Transaction History</a>
+<button class="btn btn-danger" style="float:right" (click)="deleteFromParent()">delete</button>
+<app-animation></app-animation>
+<app-delete-confirmation (onDelete)="delete($event)" (onCancel)="cancel()" [item]="Acno"></app-delete-confirmation>
+
+<button class="btn btn-danger" (click)="logout()">Log Out</button>
+
 
 <div class="body-class">
 <div class="row container-fluid "  >
-    <div class="col-4"></div>
-    <div class="col-4" id="main">
+    <div  class="col-4"></div>
+    <div [ngClass]="Acno?  's1' : '' " class="col-4" id="main">
         
-            <h1 class="text-center">Deposit</h1>
+            <h1 appHighlight class="text-center">Deposit</h1>
 
             <form [formGroup]="depositForm" (ngSubmit)="deposit()"  method="post">
 
@@ -39,10 +46,10 @@
 
 <div class="row container-fluid "  >
     <div class="col-4"></div>
-    <div class="col-4" id="main">
+    <div  [ngClass]="Acno?  's1' : '' " class="col-4" id="main">
         
             
-            <h1 class="text-center">Withdraw</h1>
+            <h1 appHighlight class="text-center">Withdraw</h1>
 
             <form  [formGroup]="withdrawForm" (ngSubmit)="withdraw()"  method="post">
 

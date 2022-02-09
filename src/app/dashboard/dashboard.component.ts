@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -8,13 +9,7 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  acno = ""
-  pswd = ""
-  amount = ""
-
-  acno1 = ""
-  pswd1 = ""
-  amount1 = ""
+  
 
   
 
@@ -32,12 +27,39 @@ export class DashboardComponent implements OnInit {
     amount1: ['', [Validators.required, Validators.pattern('[0-9]*')]]
     
     })
-  constructor(private ds: DataService, private fb: FormBuilder) { }
+
+    user:any
+    Acno=""
+    lDate:any
+    
+
+  constructor(private ds: DataService, private fb: FormBuilder,private router:Router) { 
+    this.lDate = new Date()
+    if(localStorage.getItem("currentUserName")){
+      this.user = JSON.parse(localStorage.getItem("currentUserName") || "")
+    }
+  }
 
   ngOnInit(): void {
+    if(!localStorage.getItem("token")){
+      this.router.navigateByUrl("")
+      alert("please login Mister!!!")
+    }
   }
+
+
+  logout(){
+    localStorage.removeItem("currentAcno")
+    localStorage.removeItem("currentUserName")
+    localStorage.removeItem("token")
+    this.router.navigateByUrl("")
+
+    
+  }
+
+
  
-  user=this.ds.currentUserName
+  
 
   deposit() {
     var acno = this.depositForm.value.acno
@@ -45,14 +67,21 @@ export class DashboardComponent implements OnInit {
     var amount = this.depositForm.value.amount
 
     if (this.depositForm.valid) {
-     
-
-      let result = this.ds.deposit(acno, pswd, amount)
-
-      if (result) {
-        alert(amount + "credited . new balance is :" + result)
-
+      this.ds.deposit(acno,pswd,amount)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
       }
+    },
+    (result)=>{
+      alert(result.error.message)
+    }
+    )
+    
+     
+    }
+    else{
+      alert("invalid form")
     }
   }
 
@@ -64,12 +93,54 @@ export class DashboardComponent implements OnInit {
 
     if(this.withdrawForm.valid){
 
-      let result = this.ds.withdraw(acno, pswd, amount)
-
-      if (result) {
-        alert(amount + "debited . new balance is :" + result)
-  
+       this.ds.withdraw(acno,pswd,amount)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
       }
+    },
+    (result)=>{
+      alert(result.error.message)
+    }
+    )
+    
+    
     } 
+    else{
+      alert("invalid form")
+    }
   }
-}
+
+
+
+    deleteFromParent(){
+      this.Acno =JSON.parse(localStorage.getItem("currentAcno")|| "")
+    }
+
+
+    delete(event:any){
+      this.ds.delete(event)
+      .subscribe((result:any)=>{
+        if(result){
+          alert(result.message)
+          this.router.navigateByUrl("")
+        }
+        },
+        (result)=>{
+        alert(result.error.message)
+      })
+    }
+      cancel(){
+        this.Acno=""
+      
+    
+    }
+
+
+    
+    
+
+  
+  }
+
+  

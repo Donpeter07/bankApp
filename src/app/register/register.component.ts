@@ -39,16 +39,20 @@ export class RegisterComponent implements OnInit {
     var uname= this.registerForm.value.uname
     var pswd=this.registerForm.value.pswd
     
- 
-    let result= this.ds.register(acno,pswd,uname)
- 
-    if(result){
-      alert("account registered sucessfully")
-      this.router.navigateByUrl('')
+   //Asynchronous
+    this.ds.register(acno,pswd,uname)
+    .subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+        this.router.navigateByUrl("")
+      }
+    },
+    (result)=>{
+      alert(result.error.message)
     }
-    else{
-      alert("account already exist")
-    }
+    )
+ 
+   
 
     }
     else{
